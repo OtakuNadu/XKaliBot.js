@@ -14,7 +14,6 @@ const client = new Client({
 const token = process.env.DISCORD_TOKEN
 const prefix = "xkali";
 
-
 //Bot Initiation Prompt
 client.on("ready", () => {
     console.log(`Logged into ${client.user.tag}! using Discord.js`);
