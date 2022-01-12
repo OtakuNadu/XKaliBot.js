@@ -3,6 +3,7 @@ const {Client, Intents, MessageActionRow, MessageAttachment} = require('discord.
 require("dotenv").config();
 const fs = require('fs');
 var userIDs= JSON.parse(fs.readFileSync('./resources/userIDs.json'));
+var channelIDs = JSON.parse(fs.readFileSync('./resources/channelIDs.json'))
 var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
 var responses = JSON.parse(fs.readFileSync('./resources/responses.json'));
 
@@ -19,16 +20,26 @@ client.on("ready", () => {
     console.log(`Logged into ${client.user.tag}! using Discord.js`);
 });
 
-//Member Join Event Prompt
+//Set Bot Activity - Yet to work
+client.on("ready",() =>{
+    client.user.setStatus("I am Master's faithful XKaliber!\n You can find me [living here](https://github.com/thexkaliber/XKaliBot.js)");
 
-//client.on("guildMemberAdd", (member) => {
-//
-//    const welcome_channel = member.guild.channels.cache.find(channel => channel.name.includes("general"))
-//    if (!welcome_channel) return;
-//    welcome_channel.send(`${guild.name} Server ku ungalai Anbu illamal varaverkirom <:MingoPepe:502444849442586644>
-//    Don't forget to initiate cause in the Internet, you can't make friends without initiating!! <:Prayge:865092421344034856> <@${member.id}>!\n`);
-//
-//});
+    client.user.setActivity("as my Master's Holy Sword ⚔",
+    {
+        type:"PLAYING"
+    })
+});
+
+//Member Join Event Prompt - Yet to work
+
+client.on("guildMemberAdd", (member) => {
+
+    const welcome_channel = member.guild.channels.cache.get(channelIDs.welcomeChannel)
+    if (!welcome_channel) return;
+    welcome_channel.send(`${guild.name} Server ku ungalai Anbu illamal varaverkirom <:MingoPepe:502444849442586644>
+    Don't forget to initiate cause in the Internet, you can't make friends without initiating!! <:Prayge:865092421344034856> <@${member.id}>!\n`);
+
+});
 
 //Bot Message Replies
 
@@ -47,14 +58,13 @@ client.on("messageCreate", (message) => {
       message.channel.sendTyping(5);
       message.reply( {content:"Yo! Vannakam!\nFeeling kinky today, aren't we OwO", files : [squidward] } );
     }
-
-   // if (msg.startsWith(asuka_hello_trigger))
-    //{
-
-     //   const asuka_hello = new MessageAttachment('./resources/media/asuka says hello.mp4');
-     //   message.channel.sendTyping(5);
-     //   message.reply({content:'Halo!',files : [asuka_hello]});
-   // }
+    //Hello message
+   if (possibleMsgs.hello.includes(msg) == true)
+    {
+        const asuka_hello = new MessageAttachment('./resources/media/asuka says hello.mp4');
+        message.channel.sendTyping(5);
+        message.reply({content:'Halo!',files : [asuka_hello]});
+    }
 
     //Bot Trigger when Mentioned
     if (message.mentions.has(client.user) && message.author.id != userIDs.master)
@@ -67,7 +77,14 @@ client.on("messageCreate", (message) => {
     if (possibleMsgs.shinobu.includes(msg) == true)
     {
         const shinobuTrigger = Math.floor(Math.random() * responses.shinobu.length)
-        message.reply(responses.shinobu[shinobuTrigger])
+        if (responses.shinobu[shinobuTrigger].search("✨") != -1)
+        {
+            message.reply(`${responses.shinobu[shinobuTrigger]} ${message.author}`)
+        }
+        else
+        {
+            message.reply(responses.shinobu[shinobuTrigger])
+        }
     }
 
     //When someone acts dumb
@@ -86,13 +103,33 @@ client.on("messageCreate", (message) => {
         const hanekawaCatchPhrase = new MessageAttachment('./resources/media/noob.jpg');
         message.reply({content:"Master doesn\'t know everything, He only knows what he knows.", files :[hanekawaCatchPhrase]});
     }
-    else if(possibleMsgs.noob.includes(msg) == true && message.author.id != userIDs.master)
+    else if(possibleMsgs.noob.includes(msg) == true && message.author.id != userIDs.master) //Someone else doesn't know a thing
     {
         const noobTrigger = Math.floor(Math.random() * responses.noob.length)
+        if (responses.noob[noobTrigger].search("😐") != -1)
+        {
+            message.reply(`${responses.noob[noobTrigger]} ${message.author}`)
+        }
+        else
+        {
         message.reply(responses.noob[noobTrigger])
+        }
     }
-
+    //Someone calls one a pro
+    if (possibleMsgs.pro.includes(msg) == true && message.author.id != userIDs.master)
+    {
+        const proTrigger = Math.floor(Math.random() * responses.pro.length)
+        if (responses.pro[proTrigger].search("😐") != -1)
+        {
+            message.reply(`${responses.pro[proTrigger]} ${message.author}`)
+        }
+        else
+        {
+        message.reply(responses.pro[proTrigger])
+        }
+    } 
 });
+
 
 
 
