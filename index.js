@@ -8,7 +8,7 @@ var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
 var responses = JSON.parse(fs.readFileSync('./resources/responses.json'));
 
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS,Intents.FLAGS.GUILD_PRESENCES]
   });
 
 //Set Bot Secrets and Prefix
@@ -20,11 +20,11 @@ client.on("ready", () => {
     console.log(`Logged into ${client.user.tag}! using Discord.js`);
 });
 
-//Set Bot Activity - Yet to work
+//Set Bot Activity
 client.on("ready",() =>{
-    client.user.setStatus("I am Master's faithful XKaliber!\n You can find me [living here](https://github.com/thexkaliber/XKaliBot.js)");
+    client.user.setStatus("I am Master's faithful XKaliber!");
 
-    client.user.setActivity("as my Master's Holy Sword ⚔",
+    client.user.setActivity("as my Master's Holy Sword ⚔️ on JS",
     {
         type:"PLAYING"
     })
