@@ -8,7 +8,7 @@ var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
 var responses = JSON.parse(fs.readFileSync('./resources/responses.json'));
 
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
   });
 
 //Set Bot Secrets and Prefix
@@ -30,13 +30,13 @@ client.on("ready",() =>{
     })
 });
 
-//Member Join Event Prompt - Yet to work
+//Member Join Event Prompt
 
 client.on("guildMemberAdd", (member) => {
 
-    const welcome_channel = member.guild.channels.cache.get(channelIDs.welcomeChannel)
+    const welcome_channel = member.guild.channels.cache.find(ch => ch.name.includes("general"))
     if (!welcome_channel) return;
-    welcome_channel.send(`${guild.name} Server ku ungalai Anbu illamal varaverkirom <:MingoPepe:502444849442586644>
+    welcome_channel.send(`${member.guild.name} Server ku ungalai Anbu illamal varaverkirom <:MingoPepe:502444849442586644>
     Don't forget to initiate cause in the Internet, you can't make friends without initiating!! <:Prayge:865092421344034856> <@${member.id}>!\n`);
 
 });
