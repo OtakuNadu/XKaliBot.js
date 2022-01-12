@@ -1,7 +1,9 @@
-//Pre-requisites
+//Pre-requisites Packages
 const {Client, Intents, MessageActionRow, MessageAttachment} = require('discord.js');
 require("dotenv").config();
 const fs = require('fs');
+
+//Pre-requisite JSON files.
 var userIDs= JSON.parse(fs.readFileSync('./resources/userIDs.json'));
 var channelIDs = JSON.parse(fs.readFileSync('./resources/channelIDs.json'))
 var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
