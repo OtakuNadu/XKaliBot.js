@@ -1,5 +1,5 @@
 //Pre-requisites Packages
-const {Client, Intents, MessageActionRow, MessageAttachment} = require('discord.js');
+const {Client, Intents, MessageActionRow, MessageAttachment, DiscordAPIError} = require('discord.js');
 require("dotenv").config();
 const fs = require('fs');
 
@@ -129,7 +129,32 @@ client.on("messageCreate", (message) => {
         {
         message.reply(responses.pro[proTrigger])
         }
-    } 
+    }
+    
+    //Someone mentions cursed content
+    if (possibleMsgs.cursedcodes.includes(msg) == true)
+    {
+        const cursedTrigger = Math.floor(Math.random() * responses.cursedcodes.length)
+        message.reply(respones.cursedcodes[cursedTrigger])
+    }
+
+    //When Bot Na has something to say
+    if (message.channel.name.includes("announcements") && message.author.id == userIDs.botna)
+    {
+        for (var item = 0; item <responses.botna.length; item++)
+        {
+            message.react(responses.botna[item])
+        }
+    }
+
+    //When someone posts an message with an attachment
+    if (message.channel.name.includes("announcements") != true && message.attachments.size > 0)
+    {
+        message.react("⬆️")
+        message.react("⬇️")
+    }
+
+    
 });
 
 
