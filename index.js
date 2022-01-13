@@ -154,6 +154,16 @@ client.on("messageCreate", (message) => {
         message.react("⬇️")
     }
 
+    if (message.content.startsWith("<:lmao:477783011094560778>"))
+    {
+        message.reply('<:lmao:477783011094560778>')
+    }
+
+    if (possibleMsgs.hmm.includes(msg) == true)
+    {
+        const hmmTrigger = Math.floor(Math.random() * responses.hmm.length)
+        message.react(responses.hmm[hmmTrigger])
+    }
     
 });
 
