@@ -123,7 +123,8 @@ module.exports = (Discord, client, message) =>{
    }
 
    //When someone poses a question
-   if (msg.includes(possibleMsgs.hmm) == true)
+   //if (msg.includes(possibleMsgs.hmm) == true)
+   if (/[!?]$/.test(msg) == true)
    {
        const hmmTrigger = Math.floor(Math.random() * responses.hmm.length)
        message.react(responses.hmm[hmmTrigger])
