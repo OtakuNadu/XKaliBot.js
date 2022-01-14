@@ -13,3 +13,5 @@ module.exports = (client, Discord) => {
 
     ['client','guild'].forEach(e => load_dir(e));
 }
+
+console.log("event_handler.js Handler Module is Nominal!")

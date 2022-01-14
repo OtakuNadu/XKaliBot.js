@@ -20,5 +20,7 @@ client.events = new Discord.Collection();
 const token = process.env.DISCORD_TOKEN
 const prefix = "xkali";
 
+//Login to Discord
 client.login(token);
 
+console.log("XKaliBot Main Module is Nominal!")
