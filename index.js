@@ -1,5 +1,5 @@
 //Pre-requisites Packages
-const {Client, Intents, MessageActionRow, MessageAttachment, DiscordAPIError} = require('discord.js');
+const {Client, Collection, Intents, MessageActionRow, MessageAttachment, DiscordAPIError} = require('discord.js');
 require("dotenv").config();
 const fs = require('fs');
 
@@ -13,26 +13,18 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS,Intents.FLAGS.GUILD_PRESENCES]
   });
 
+//Set Command Handling
+client.commands = new Collection();
+client.events = new Collection();
+
+['command_handler','event_handler'].forEach(handler =>{
+    require(`./handlers/${handler}`)(client, Client);
+}) 
+
 //Set Bot Secrets and Prefix
 const token = process.env.DISCORD_TOKEN
 const prefix = "xkali";
 
-//Bot Initiation Prompt
-client.on("ready", () => {
-    console.log(`Logged into ${client.user.tag}! using Discord.js`);
-});
-
-//Set Bot Activity
-client.on("ready",() =>{
-    client.user.setStatus("I am Master's faithful XKaliber!");
-
-    client.user.setActivity("as my Master's Holy Sword ⚔️ on JS",
-    {
-        type:"PLAYING"
-    })
-});
-
-//Member Join Event Prompt
 
 client.on("guildMemberAdd", (member) => {
 
@@ -154,11 +146,13 @@ client.on("messageCreate", (message) => {
         message.react("⬇️")
     }
 
+    //When someone laughs
     if (message.content.startsWith("<:lmao:477783011094560778>"))
     {
         message.reply('<:lmao:477783011094560778>')
     }
 
+    //When someone poses a question
     if (possibleMsgs.hmm.includes(msg) == true)
     {
         const hmmTrigger = Math.floor(Math.random() * responses.hmm.length)
