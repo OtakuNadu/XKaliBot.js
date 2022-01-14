@@ -1,6 +1,6 @@
+console.log('ready.js Event Module is Nominal!')
 module.exports = (Discord, client) =>{
         console.log(`Logged into ${client.user.tag}! using Discord.js`);
-        console.log('ready.js is Nominal!')
 
         client.user.setStatus("I am Master's faithful XKaliber!");
     
