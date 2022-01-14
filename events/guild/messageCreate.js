@@ -17,17 +17,29 @@ module.exports = (Discord, client, message) =>{
     //Welcome reaction
     if (msg.startsWith("wannacum") || msg.startsWith('whalecum')) 
     {
+      try{
       const squidward = new Discord.MessageAttachment('https://c.tenor.com/2zEJyyQy3GEAAAAC/daring-today-are-we-spongebob.gif');
       message.channel.sendTyping(5);
       message.reply( {content:"Yo! Vannakam!\nFeeling kinky today, aren't we OwO", files : [squidward] } );
+      } catch (e) {
+        message.reply("Ummm, My brain farted there, Could you try again or check with master if this repeats?")
+     } finally {
+      return
+    }
     }
 
      //Hello message
    if (possibleMsgs.hello.includes(msg) == true)
-   {
+   {  
+       try{
        const asuka_hello = new Discord.MessageAttachment('./resources/media/asuka says hello.mp4');
        message.channel.sendTyping(5);
        message.reply({content:'Halo!',files : [asuka_hello]});
+       } catch (e) {
+        message.reply("Ummm, My brain farted there, Could you try again or check with master if this repeats?")
+     } finally {
+      return
+    }
    }
 
    //Bot Trigger when Mentioned
@@ -64,8 +76,14 @@ module.exports = (Discord, client, message) =>{
    //When master doesn't know a thing
    if (possibleMsgs.noob.includes(msg) == true && message.author.id == userIDs.master)
    {
+       try{
        const hanekawaCatchPhrase = new Discord.MessageAttachment('./resources/media/noob.jpg');
        message.reply({content:"Master doesn\'t know everything, He only knows what he knows.", files :[hanekawaCatchPhrase]});
+       } catch (e) {
+          message.reply("Ummm, My brain farted there, Could you try again or check if something is wrong with me?")
+       } finally {
+        return
+      }
    }
    else if(possibleMsgs.noob.includes(msg) == true && message.author.id != userIDs.master) //Someone else doesn't know a thing
    {
