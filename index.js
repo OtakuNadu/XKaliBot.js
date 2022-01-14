@@ -23,4 +23,4 @@ const prefix = "xkali";
 //Login to Discord
 client.login(token);
 
-console.log("XKaliBot Main Module is Nominal!")
+console.log("\nXKaliBot Main Module is Nominal!")

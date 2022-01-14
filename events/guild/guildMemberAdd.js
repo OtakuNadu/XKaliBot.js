@@ -1,4 +1,4 @@
-console.log("guildMemberAdd.js Event Module is Nominal!")
+console.log("\nguildMemberAdd.js Event Module is Nominal!")
 module.exports = (Discord, client, member) =>{
     const welcome_channel = member.guild.channels.cache.find(ch => ch.name.includes("general"))
     if (!welcome_channel) return;

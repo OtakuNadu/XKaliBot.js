@@ -5,7 +5,7 @@ var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
 var responses = JSON.parse(fs.readFileSync('./resources/responses.json'));
 var userIDs= JSON.parse(fs.readFileSync('./resources/userIDs.json'));
 var channelIDs = JSON.parse(fs.readFileSync('./resources/channelIDs.json'))
-console.log("messageCreate.js Event Module is Nominal!")
+console.log("\nmessageCreate.js Event Module is Nominal!")
 
 module.exports = (Discord, client, message) =>{
     //Check if it's me or my fellow bots.

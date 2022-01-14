@@ -13,4 +13,4 @@ module.exports = (client, Discord) =>{
 
     }
 }
-console.log("command_handler.js Handler Module is Nominal!")
+console.log("\ncommand_handler.js Handler Module is Nominal!")
