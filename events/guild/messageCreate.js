@@ -1,10 +1,10 @@
 //Pre-requisite JSON files
-
 const fs = require('fs');
 var possibleMsgs = JSON.parse(fs.readFileSync('./resources/possibleMsgs.json'));
 var responses = JSON.parse(fs.readFileSync('./resources/responses.json'));
 var userIDs= JSON.parse(fs.readFileSync('./resources/userIDs.json'));
 var channelIDs = JSON.parse(fs.readFileSync('./resources/channelIDs.json'))
+var config = JSON.parse(fs.readFileSync('./resources/config.json'));
 console.log("\nmessageCreate.js Event Module is Nominal!")
 
 module.exports = (Discord, client, message) =>{
@@ -14,6 +14,13 @@ module.exports = (Discord, client, message) =>{
     //Convert all text to lowercase
     msg = message.content.toLowerCase();
 
+    //Command parsing 
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    const command = client.commands.get(cmd);
+
+    if (!cmd && message.content.indexOf(config.prefix) !== 0)
+    {
     //Welcome reaction
     if (msg.startsWith("wannacum") || msg.startsWith('whalecum')) 
     {
@@ -147,5 +154,18 @@ module.exports = (Discord, client, message) =>{
        const hmmTrigger = Math.floor(Math.random() * responses.hmm.length)
        message.react(responses.hmm[hmmTrigger])
    }
+
+    } else{
+        try{
+            
+        if (command) command.execute(client, message, args, Discord);
+
+    } catch (err)
+    {
+        console.log(err);
+        message.channel.send("I caught a bug!")
+    }
+
+    }
    
 }
