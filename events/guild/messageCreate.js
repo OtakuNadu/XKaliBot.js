@@ -17,7 +17,7 @@ module.exports = (Discord, client, message) =>{
     //Command parsing 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
-    const command = client.commands.get(cmd);
+    const command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.includes(cmd));
 
     if (!cmd && message.content.indexOf(config.prefix) !== 0)
     {
