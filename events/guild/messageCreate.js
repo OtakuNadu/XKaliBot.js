@@ -159,7 +159,7 @@ module.exports = (Discord, client, message) =>{
    if (msg.includes('69'))
    {
        const sixnineTrigger = Math.floor(Math.random() * responses.sixnine.length)
-       message.replY(responses.sixnine[sixnineTrigger])
+       message.reply(responses.sixnine[sixnineTrigger])
    }
 
     } else{
