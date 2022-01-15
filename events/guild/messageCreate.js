@@ -157,13 +157,15 @@ module.exports = (Discord, client, message) =>{
 
     } else{
         try{
-            
-        if (command) command.execute(client, message, args, Discord);
+            if(message.content.startsWith(config.prefix))
+            {
+             if (command) command.execute(client, message, args, Discord);
+            }
 
     } catch (err)
     {
         console.log(err);
-        message.channel.send("I caught a bug!")
+        message.channel.send(`I caught a bug! <@${userIDs.master}>`)
     }
 
     }
