@@ -162,6 +162,12 @@ module.exports = (Discord, client, message) =>{
        message.reply(responses.sixnine[sixnineTrigger])
    }
 
+   if(possibleMsgs.kira.includes(msg))
+   {
+       const kiraTrigger = Math.floor(Math.random() * responses.kira.length)
+       message.reply(responses.kira[kiraTrigger])
+   }
+
     } else{
         try{
             if(message.content.startsWith(config.prefix))
