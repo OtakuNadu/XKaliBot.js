@@ -155,6 +155,13 @@ module.exports = (Discord, client, message) =>{
        message.react(responses.hmm[hmmTrigger])
    }
 
+   //When someone says the funny number
+   if (msg.includes('69'))
+   {
+       const sixnineTrigger = Math.floor(Math.random() * responses.sixnine.length)
+       message.replY(responses.sixnine[sixnineTrigger])
+   }
+
     } else{
         try{
             if(message.content.startsWith(config.prefix))
