@@ -15,7 +15,7 @@ module.exports = (client, Discord) =>{
         }
     }
 
-    ['general', 'memes'].forEach(e => load_dir(e));
+    ['general', 'memes','info'].forEach(e => load_dir(e));
   
 }
 
